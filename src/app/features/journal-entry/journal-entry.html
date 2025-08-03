@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>¿Cómo te sientes hoy?</h2>
+
+<mat-dialog-content>
+  <p class="subtitle">{{ data.date | date:'fullDate' }}</p>
+  
+  <div class="emotions-container">
+    <button 
+      *ngFor="let emotion of emotions"
+      class="emotion-button" 
+      [class.selected]="selectedEmotionIds.has(emotion.id)"
+      (click)="toggleEmotion(emotion.id)"
+      [style.background-color]="emotion.color">
+      {{ emotion.icon }} {{ emotion.name }}
+    </button>
+  </div>
+  
+  <mat-form-field class="notes-field">
+    <mat-label>Tus notas, pensamientos o logros del día</mat-label>
+    <textarea matInput [(ngModel)]="notes" rows="5"></textarea>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="selectedEmotionIds.size === 0">Guardar</button>
+</mat-dialog-actions>

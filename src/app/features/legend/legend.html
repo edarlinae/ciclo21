@@ -1,0 +1,9 @@
+<div class="legend-container">
+  <h3>Leyenda</h3>
+  <ul>
+    <li *ngFor="let emotion of emotions">
+      <span class="color-swatch" [style.background-color]="emotion.color"></span>
+      {{ emotion.icon }} {{ emotion.name }}
+    </li>
+  </ul>
+</div>

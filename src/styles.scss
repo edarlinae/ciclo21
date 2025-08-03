@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+// LA LÍNEA @use DEBE IR SIEMPRE PRIMERO
+@use '@angular/material' as mat;
+
+// AHORA LAS OTRAS REGLAS
+:root {
+  --background-color: #f8f9fa;
+  --font-color: #495057;
+  --primary-color: #673ab7;
+  --border-color: #dee2e6;
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--font-color);
+}

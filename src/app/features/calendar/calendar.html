@@ -1,0 +1,33 @@
+<div class="calendar-container">
+  <div class="header">
+    <button mat-icon-button (click)="changeMonth(-1)" aria-label="Mes anterior">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <h2>{{ viewDate | date:'MMMM yyyy' | titlecase }}</h2>
+    <button mat-icon-button (click)="changeMonth(1)" aria-label="Mes siguiente">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+  
+  <div class="calendar-grid">
+    <div class="day-header">Lun</div>
+    <div class="day-header">Mar</div>
+    <div class="day-header">Mié</div>
+    <div class="day-header">Jue</div>
+    <div class="day-header">Vie</div>
+    <div class="day-header">Sáb</div>
+    <div class="day-header">Dom</div>
+    
+    <div class="day" *ngFor="let day of daysInMonth" [class.not-current-month]="!day.isCurrentMonth" (click)="day.isCurrentMonth && openJournalEntry(day.date)">
+      <span class="day-number" [class.today]="isToday(day.date)">{{ day.dayNumber }}</span>
+      
+      <div class="dots-container" *ngIf="getEntryForDate(day.date) as entry">
+        <div 
+          *ngFor="let emotionId of entry.emotionIds" 
+          class="emotion-dot"
+          [style.background-color]="getEmotionColorFromId(emotionId)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
