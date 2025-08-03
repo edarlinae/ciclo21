@@ -31,12 +31,14 @@ export class JournalEntryComponent implements OnInit {
   public data: { date: string, entry: JournalEntry | undefined } = inject(MAT_DIALOG_DATA);
 
   public emotions: Emotion[] = [];
-  public selectedEmotionIds: Set<string> = new Set(); // Usamos un Set
+  public title: string = '';
+  public selectedEmotionIds: Set<string> = new Set();
   public notes: string = '';
 
   ngOnInit(): void {
     this.emotions = this.journalService.getEmotions();
     if (this.data.entry) {
+      this.title = this.data.entry.title;
       this.selectedEmotionIds = new Set(this.data.entry.emotionIds);
       this.notes = this.data.entry.notes;
     }
@@ -51,12 +53,13 @@ export class JournalEntryComponent implements OnInit {
   }
 
   save(): void {
-    if (this.selectedEmotionIds.size === 0) {
+    if (!this.title || this.selectedEmotionIds.size === 0) {
       return; 
     }
     const entry: JournalEntry = {
       date: this.data.date,
-      emotionIds: Array.from(this.selectedEmotionIds), // Convertimos el Set a Array
+      title: this.title,
+      emotionIds: Array.from(this.selectedEmotionIds),
       notes: this.notes
     };
     this.journalService.saveEntry(entry);

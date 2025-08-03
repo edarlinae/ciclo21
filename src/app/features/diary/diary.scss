@@ -1,0 +1,121 @@
+.diary-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.diary-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.no-entries {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  color: #6c757d;
+  p {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+  }
+}
+
+.entry-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+}
+
+.entry-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  span {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+}
+
+.entry-notes {
+  line-height: 1.7;
+  color: #495057;
+  white-space: pre-wrap;
+}
+
+.entry-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.dots-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.emotion-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+
+  &:not(:first-child) {
+    margin-left: -6px; 
+  }
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.day-pill {
+  background-color: #e8eaf6;
+  color: #3f51b5;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}

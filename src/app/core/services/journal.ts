@@ -9,6 +9,8 @@ import { Emotion } from '../../models/emotion';
 export class JournalService {
   private entriesSubject = new BehaviorSubject<JournalEntry[]>([]);
   public entries$ = this.entriesSubject.asObservable();
+  private readonly storageKey = 'ciclo21-entries';
+  private readonly startDateKey = 'ciclo21-startDate';
 
   private readonly emotions: Emotion[] = [
     { id: 'felicidad', name: 'Felicidad', color: '#F9E79F', icon: '😄' },
@@ -21,7 +23,7 @@ export class JournalService {
 
   constructor() {
     if (typeof window !== 'undefined' && window.localStorage) {
-      const savedEntries = localStorage.getItem('ciclo21-entries');
+      const savedEntries = localStorage.getItem(this.storageKey);
       if (savedEntries) {
         this.entriesSubject.next(JSON.parse(savedEntries));
       }
@@ -40,7 +42,32 @@ export class JournalService {
     return this.entriesSubject.getValue().find(e => e.date === date);
   }
 
+  getChallengeDay(entryDateStr: string): number | null {
+    const startDateStr = localStorage.getItem(this.startDateKey);
+    if (!startDateStr) {
+      return null; // El reto no ha comenzado
+    }
+
+    const startDate = new Date(startDateStr);
+    startDate.setHours(0, 0, 0, 0);
+
+    const entryDate = new Date(entryDateStr);
+    entryDate.setHours(0, 0, 0, 0);
+    
+    const diffTime = entryDate.getTime() - startDate.getTime();
+    if (diffTime < 0) {
+      return null; // La entrada es anterior al inicio del reto
+    }
+
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays + 1;
+  }
+
   saveEntry(entry: JournalEntry) {
+    if (!localStorage.getItem(this.startDateKey)) {
+      localStorage.setItem(this.startDateKey, entry.date);
+    }
+
     const currentEntries = this.entriesSubject.getValue();
     const existingEntryIndex = currentEntries.findIndex(e => e.date === entry.date);
 
@@ -56,7 +83,7 @@ export class JournalService {
 
   private saveToLocalStorage(entries: JournalEntry[]) {
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem('ciclo21-entries', JSON.stringify(entries));
+      localStorage.setItem(this.storageKey, JSON.stringify(entries));
     }
   }
 }

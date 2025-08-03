@@ -3,6 +3,11 @@
 <mat-dialog-content>
   <p class="subtitle">{{ data.date | date:'fullDate' }}</p>
   
+  <mat-form-field class="title-field">
+    <mat-label>Título de la entrada</mat-label>
+    <input matInput [(ngModel)]="title" required>
+  </mat-form-field>
+  
   <div class="emotions-container">
     <button 
       *ngFor="let emotion of emotions"
@@ -23,5 +28,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancelar</button>
-  <button mat-flat-button color="primary" (click)="save()" [disabled]="selectedEmotionIds.size === 0">Guardar</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="!title || selectedEmotionIds.size === 0">Guardar</button>
 </mat-dialog-actions>
