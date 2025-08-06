@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
   public challengeStatus: ChallengeStatus | null = null;
 
   ngOnInit(): void {
-    this.journalService.entries$.subscribe(() => {
-      this.challengeStatus = this.journalService.getChallengeStatus();
+    this.journalService.entries$.subscribe(async () => { // <-- async
+      this.challengeStatus = await this.journalService.getChallengeStatus(); // <-- await
     });
   }
 }
