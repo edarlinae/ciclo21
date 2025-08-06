@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="changeMonth(-1)" aria-label="Mes anterior">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <h2>{{ viewDate | date:'MMMM yyyy' | titlecase }}</h2>
+    <h2>{{ viewDate | date:'MMMM yyyy' }}</h2>
     <button mat-icon-button (click)="changeMonth(1)" aria-label="Mes siguiente">
       <mat-icon>chevron_right</mat-icon>
     </button>
@@ -19,6 +19,11 @@
     <div class="day-header">Dom</div>
     
     <div class="day" *ngFor="let day of daysInMonth" [class.not-current-month]="!day.isCurrentMonth" (click)="day.isCurrentMonth && openJournalEntry(day.date)">
+      
+      <span *ngIf="getChallengeDayForDate(day.date) as challengeDay" class="challenge-day-pill">
+        Día {{ challengeDay }}
+      </span>
+
       <span class="day-number" [class.today]="isToday(day.date)">{{ day.dayNumber }}</span>
       
       <div class="dots-container" *ngIf="getEntryForDate(day.date) as entry">

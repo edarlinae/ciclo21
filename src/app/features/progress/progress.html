@@ -1,0 +1,40 @@
+<div class="progress-container">
+  <header class="progress-header">
+    <div *ngIf="!status.startDate">
+      <h1>Tu Reto de 21 Días</h1>
+      <p>Crea tu primera entrada en el diario para comenzar tu ciclo.</p>
+    </div>
+    <div *ngIf="status.startDate && !status.isCompleted && !status.streakBroken">
+      <h1>¡Vas por el Día {{ status.currentDay }}!</h1>
+      <p>Sigue así, la constancia es la clave del éxito.</p>
+    </div>
+    <div *ngIf="status.streakBroken">
+        <h1>Hubo una Pausa en tu Racha</h1>
+        <p>¡No te preocupes! Cada día es una nueva oportunidad. Tu ciclo se ha reiniciado.</p>
+    </div>
+    <div *ngIf="status.isCompleted">
+        <h1>¡Ciclo de 21 Días Completado!</h1>
+        <p>¡Felicidades! Has demostrado un compromiso increíble contigo misma.</p>
+    </div>
+  </header>
+
+  <div class="timeline">
+    <div class="line"></div>
+    <div class="step-container" *ngFor="let day of days">
+      <div class="step" [ngClass]="{
+        'completed': day < status.currentDay && !status.streakBroken,
+        'active': day === status.currentDay && !status.streakBroken
+      }">
+        {{ day }}
+      </div>
+    </div>
+    <div class="label-start">INICIO</div>
+    <div class="label-end">FIN</div>
+  </div>
+
+  <div class="actions">
+    <button mat-stroked-button color="warn" (click)="resetChallenge()">
+      Reiniciar Ciclo
+    </button>
+  </div>
+</div>

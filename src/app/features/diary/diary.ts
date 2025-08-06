@@ -46,9 +46,10 @@ export class DiaryComponent implements OnInit {
     return this.journalService.getChallengeDay(date);
   }
   
+  // --- MÉTODO ACTUALIZADO ---
   deleteEntry(date: string): void {
-    if (confirm('¿Estás seguro de que quieres borrar esta entrada?')) {
-      alert('Función para borrar próximamente.');
+    if (confirm('¿Estás seguro de que quieres borrar esta entrada? Esta acción no se puede deshacer.')) {
+      this.journalService.deleteEntry(date);
     }
   }
 }

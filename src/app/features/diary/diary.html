@@ -22,7 +22,7 @@
             </span>
             <h2>{{ entry.title }}</h2>
         </div>
-        <span>{{ entry.date | date:'longDate':'':'es' }}</span>
+        <span>{{ entry.date | date:'longDate' }}</span>
       </div>
       <p class="entry-notes">{{ entry.notes }}</p>
       <div class="entry-card-footer">
@@ -32,9 +32,16 @@
                [style.background-color]="getEmotionColorFromId(emotionId)">
           </div>
         </div>
-        <button mat-icon-button color="warn" (click)="deleteEntry(entry.date)">
-          <mat-icon>delete_outline</mat-icon>
-        </button>
+        
+        <div> <button mat-icon-button (click)="openJournalEntry(entry)" aria-label="Editar entrada">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="deleteEntry(entry.date)" aria-label="Borrar entrada">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>

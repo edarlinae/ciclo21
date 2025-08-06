@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  flex: 1; // Para que ocupen el espacio
+  flex: 1;
 }
 
 .nav-left {
@@ -62,5 +62,20 @@
 
   &.active-link::after {
     width: 100%;
+  }
+}
+
+// ESTILOS PARA EL NUEVO CONTADOR
+.challenge-counter {
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background-color: #e8eaf6;
+  color: #3f51b5;
+
+  &.completed {
+    background-color: #c8e6c9; // Verde suave
+    color: #2e7d32;
   }
 }

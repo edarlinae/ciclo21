@@ -3,6 +3,7 @@ import { HomeComponent } from './features/home/home';
 import { MainLayoutComponent } from './shell/main-layout/main-layout';
 import { DiaryComponent } from './features/diary/diary';
 import { Calendar } from './features/calendar/calendar';
+import { ProgressComponent } from './features/progress/progress';
 
 export const routes: Routes = [
   {
@@ -11,16 +12,17 @@ export const routes: Routes = [
     title: 'Ciclo 21 - Inicio'
   },
   {
-    path: 'app', // Una ruta "padre" para todo lo que va dentro de la app
+    path: 'app',
     component: MainLayoutComponent,
-    children: [ // Rutas "hijas" que se mostrarán dentro del MainLayout
+    children: [
       { path: 'calendario', component: Calendar, title: 'Ciclo 21 - Calendario' },
       { path: 'diario', component: DiaryComponent, title: 'Ciclo 21 - Diario' },
-      { path: '', redirectTo: 'diario', pathMatch: 'full' } // Redirige /app a /app/diario
+      { path: 'progreso', component: ProgressComponent, title: 'Ciclo 21 - Mi Progreso'},
+      { path: '', redirectTo: 'diario', pathMatch: 'full' }
     ]
   },
   {
-    path: '**', // Cualquier otra ruta
+    path: '**',
     redirectTo: ''
   }
 ];

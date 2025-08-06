@@ -5,7 +5,19 @@
   <div class="nav-center">
     <a routerLink="/app/diario" routerLinkActive="active-link">Diario</a>
     <a routerLink="/app/calendario" routerLinkActive="active-link">Calendario</a>
+    <a routerLink="/app/progreso" routerLinkActive="active-link">Progreso</a>
   </div>
   <div class="nav-right">
-    </div>
+    <ng-container *ngIf="challengeStatus">
+      
+      <div *ngIf="challengeStatus.startDate && !challengeStatus.isCompleted" class="challenge-counter">
+        Día {{ challengeStatus.currentDay }} / 21
+      </div>
+
+      <div *ngIf="challengeStatus.isCompleted" class="challenge-counter completed">
+        ¡Reto Completado!
+      </div>
+
+    </ng-container>
+  </div>
 </nav>

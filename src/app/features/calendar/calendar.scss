@@ -2,14 +2,14 @@
   --primary: var(--primary-color);
   --font-color: var(--font-color);
   --background: var(--background-color);
-  --border-color: #f1f3f5; // Un borde más suave
+  --border-color: #f1f3f5;
 }
 
 .calendar-container {
   flex-grow: 1;
   background-color: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08); // Una sombra más pronunciada
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
   padding: 2.5rem;
 }
 
@@ -34,7 +34,7 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 12px; // Un poco más de separación
+  gap: 12px;
 }
 
 .day-header {
@@ -46,23 +46,20 @@
 }
 
 .day {
-  // --- LA MAGIA ESTÁ AQUÍ ---
-  aspect-ratio: 1 / 1; // Fuerza a que la celda sea un cuadrado perfecto
-  // height: 140px; // Eliminamos la altura fija
-
+  aspect-ratio: 1 / 1;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; // Alineamos el contenido
-  align-items: flex-start; // Alineamos a la izquierda
-  padding: 10px; // Añadimos padding interno
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
   
   border-radius: 12px;
-  background-color: #fcfdff; // Un fondo casi blanco pero no puro
+  background-color: #fcfdff;
   border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all 0.3s ease;
-  overflow: hidden; // Para que los efectos no se salgan
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-4px);
@@ -84,18 +81,26 @@
   }
 }
 
+// ESTILO PARA LA NUEVA ETIQUETA
+.challenge-day-pill {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #e8eaf6;
+  color: #3f51b5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+
 .day-number {
-  font-size: 1rem; // Ajustamos el tamaño
+  font-size: 1rem;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  // Quitamos los estilos de círculo para un look más limpio
-  // width: 36px;
-  // height: 36px;
-  // border-radius: 50%;
-  // margin-top: 8px;
 
   &.today {
     color: var(--primary);
@@ -104,20 +109,19 @@
 }
 
 .dots-container {
-  // Lo movemos a la esquina inferior derecha
-  position: static; // Ya no es absoluto
+  position: static;
   display: flex;
-  justify-content: flex-end; // Alineamos a la derecha
+  justify-content: flex-end;
   align-items: center;
-  width: 100%; // Ocupa todo el ancho de la celda
+  width: 100%;
   gap: 4px;
 }
 
 .emotion-dot {
-  width: 10px; // Un poco más pequeños para este diseño
+  width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.05); // Borde muy sutil
+  border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
 

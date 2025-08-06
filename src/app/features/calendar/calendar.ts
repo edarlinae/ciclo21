@@ -3,7 +3,6 @@ import { CommonModule, TitleCasePipe, DatePipe } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
 import { JournalService } from '../../core/services/journal';
 import { JournalEntryComponent } from '../journal-entry/journal-entry';
 import { JournalEntry } from '../../models/journal-entry';
@@ -50,7 +49,16 @@ export class Calendar implements OnInit {
     this.generateCalendarDays(this.viewDate);
   }
 
+  // --- MÉTODO CORREGIDO ---
   openJournalEntry(date: string): void {
+    const todayStr = this.formatDate(new Date());
+
+    // Comparamos las fechas como texto 'YYYY-MM-DD' para evitar errores de zona horaria.
+    // Si la fecha seleccionada es mayor que la de hoy, no hacemos nada.
+    if (date > todayStr) {
+      return;
+    }
+
     const entry = this.journalService.getEntryForDate(date);
     this.dialog.open(JournalEntryComponent, {
       width: '500px',
@@ -64,6 +72,10 @@ export class Calendar implements OnInit {
 
   public getEntryForDate(date: string): JournalEntry | undefined {
     return this.journalService.getEntryForDate(date);
+  }
+  
+  public getChallengeDayForDate(date: string): number | null {
+    return this.journalService.getChallengeDay(date);
   }
 
   public getEmotionColorFromId(id: string): string {
