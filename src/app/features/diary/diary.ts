@@ -6,26 +6,31 @@ import { MatDialog } from '@angular/material/dialog';
 import { JournalService } from '../../core/services/journal';
 import { JournalEntry } from '../../models/journal-entry';
 import { JournalEntryComponent } from '../journal-entry/journal-entry';
+import { QuoteCardComponent } from '../quote-card/quote-card'; // <-- IMPORTAR
 
 @Component({
   selector: 'app-diary',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, DatePipe],
+  imports: [
+    CommonModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    DatePipe,
+    QuoteCardComponent // <-- AÑADIR
+  ],
   templateUrl: './diary.html',
   styleUrl: './diary.scss'
 })
 export class DiaryComponent implements OnInit {
+  // ... (el resto del código del componente no cambia)
   private journalService = inject(JournalService);
   private dialog = inject(MatDialog);
-
   public entries: JournalEntry[] = [];
-
   ngOnInit(): void {
     this.journalService.entries$.subscribe(entries => {
       this.entries = entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     });
   }
-
   openJournalEntry(entryToEdit?: JournalEntry): void {
     this.dialog.open(JournalEntryComponent, {
       width: '500px',
@@ -36,17 +41,13 @@ export class DiaryComponent implements OnInit {
       }
     });
   }
-
   getEmotionColorFromId(id: string): string {
     const emotion = this.journalService.getEmotionById(id);
     return emotion ? emotion.color : '';
   }
-
   getChallengeDayForEntry(date: string): number | null {
     return this.journalService.getChallengeDay(date);
   }
-  
-  // --- MÉTODO ACTUALIZADO ---
   deleteEntry(date: string): void {
     if (confirm('¿Estás seguro de que quieres borrar esta entrada? Esta acción no se puede deshacer.')) {
       this.journalService.deleteEntry(date);

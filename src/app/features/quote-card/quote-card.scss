@@ -1,0 +1,29 @@
+.quote-card {
+  background: linear-gradient(45deg, #673ab7, #512da8);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 30px rgba(103, 58, 183, 0.4);
+  text-align: center;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+blockquote p {
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+blockquote footer {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.8;
+}

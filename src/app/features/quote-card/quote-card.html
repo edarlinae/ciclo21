@@ -1,0 +1,6 @@
+<div *ngIf="quote$ | async as quotes" class="quote-card">
+  <blockquote *ngIf="quotes.length > 0">
+    <p>"{{ quotes[0].q }}"</p>
+    <footer>— {{ quotes[0].a }}</footer>
+  </blockquote>
+</div>

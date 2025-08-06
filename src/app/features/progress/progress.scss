@@ -1,89 +1,111 @@
-.progress-container {
-  max-width: 1000px;
-  margin: 2rem auto;
+:host {
+  --primary-color: #673ab7;
+  --completed-color: #4caf50;
+  --light-gray: #f1f3f5;
+  --text-color: #495057;
+  --warn-color: #e57373; // Un rojo más suave
+}
+
+.progress-page-container {
+  display: flex;
+  justify-content: center;
   padding: 2rem;
+}
+
+.progress-card {
+  width: 100%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 2rem 3rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
   text-align: center;
 }
 
 .progress-header {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 600;
-    color: #673ab7;
+    color: var(--primary-color);
   }
   p {
     font-size: 1.1rem;
     color: #6c757d;
+    margin-top: 0.5rem;
   }
 }
 
-.timeline {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 4rem;
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
-.line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background-color: #e0e0e0;
-  transform: translateY(-50%);
-  z-index: -1;
-}
-
-.step-container {
-  position: relative;
-}
-
-.step {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: 3px solid #e0e0e0;
+.day-cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  color: #bdbdbd;
-  transition: all 0.4s ease;
+  font-size: 1.2rem;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+
+  background-color: var(--light-gray);
+  color: #adb5bd;
+
+  .day-number {
+    transition: all 0.3s ease;
+  }
+
+  mat-icon {
+    position: absolute;
+    font-size: 1.5rem;
+    color: var(--completed-color);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+  }
 
   &.completed {
-    border-color: #673ab7;
-    background-color: #d1c4e9;
-    color: #512da8;
+    background-color: #e8f5e9;
+    color: transparent;
+
+    mat-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
+
   &.active {
-    border-color: #673ab7;
-    background-color: #673ab7;
+    background-color: var(--primary-color);
     color: #fff;
-    transform: scale(1.2);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(103, 58, 183, 0.4);
   }
-}
-
-.label-start, .label-end {
-  position: absolute;
-  top: calc(50% + 30px);
-  transform: translateY(-50%);
-  font-weight: 500;
-  color: #757575;
-}
-
-.label-start { 
-  left: -50px; 
-}
-
-/* LÍNEA CORREGIDA */
-.label-end { 
-  right: -35px; 
 }
 
 .actions {
-  margin-top: 4rem;
+  margin-top: 2rem;
+}
+
+/* --- NUEVOS ESTILOS PARA EL BOTÓN --- */
+.reset-button {
+  padding: 0.6rem 1.5rem;
+  border-width: 2px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  // Sobrescribimos el color por defecto de 'warn'
+  border-color: var(--warn-color);
+  color: var(--warn-color);
+
+  &:hover {
+    background-color: var(--warn-color);
+    color: #fff;
+  }
 }

@@ -1,4 +1,7 @@
 <div class="diary-container">
+  
+  <app-quote-card></app-quote-card>
+
   <header class="diary-header">
     <h1>Diario de Progreso</h1>
     <p>Un espacio seguro para registrar tus sentimientos y reflexionar sobre tu viaje.</p>
@@ -13,7 +16,6 @@
       <p>Aún no has escrito ninguna entrada.</p>
       <span>¡Haz clic en "Añadir Nueva Entrada" para comenzar!</span>
     </div>
-
     <div class="entry-card" *ngFor="let entry of entries">
       <div class="entry-card-header">
         <div class="title-group">
@@ -32,16 +34,14 @@
                [style.background-color]="getEmotionColorFromId(emotionId)">
           </div>
         </div>
-        
-        <div> <button mat-icon-button (click)="openJournalEntry(entry)" aria-label="Editar entrada">
+        <div>
+          <button mat-icon-button (click)="openJournalEntry(entry)" aria-label="Editar entrada">
             <mat-icon>edit</mat-icon>
           </button>
-
           <button mat-icon-button color="warn" (click)="deleteEntry(entry.date)" aria-label="Borrar entrada">
             <mat-icon>delete_outline</mat-icon>
           </button>
         </div>
-
       </div>
     </div>
   </div>
