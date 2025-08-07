@@ -5,7 +5,7 @@ Bienvenido/a a **Ciclo 21**, una aplicación web progresiva desarrollada con **A
 Este proyecto fusiona un backend robusto con **Firebase** y un frontend moderno y reactivo para ofrecer una experiencia de usuario fluida, segura y motivadora.
 
 🔗 **[Demo en Vivo](URL_DE_TU_DEMO_AQUI)**
-🔗 **[Repositorio en GitHub](URL_DE_TU_REPOSITORIO_AQUI)**
+🔗 **[Repositorio en GitHub](https://github.com/edarlinae/ciclo21.git)**
 
 ---
 
@@ -110,7 +110,7 @@ Este proyecto fusiona un backend robusto con **Firebase** y un frontend moderno 
 
 ```bash
 # 1. Clona el repositorio
-git clone URL_DE_TU_REPOSITORIO_AQUI
+git clone (https://github.com/edarlinae/ciclo21.git)
 
 # 2. Entra al directorio del proyecto
 cd ciclo21
