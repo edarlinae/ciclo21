@@ -2,12 +2,14 @@
   <div class="nav-left">
     <a routerLink="/" class="logo">Ciclo 21</a>
   </div>
-  <div class="nav-center">
+
+  <div class="nav-center desktop-nav">
     <a routerLink="/app/diario" routerLinkActive="active-link">Diario</a>
     <a routerLink="/app/calendario" routerLinkActive="active-link">Calendario</a>
     <a routerLink="/app/progreso" routerLinkActive="active-link">Progreso</a>
     <a routerLink="/app/foro" routerLinkActive="active-link">Foro</a>
   </div>
+
   <div class="nav-right">
     <ng-container *ngIf="challengeStatus">
       <div *ngIf="challengeStatus.startDate && !challengeStatus.isCompleted" class="challenge-counter">
@@ -17,6 +19,19 @@
         ¡Reto Completado!
       </div>
     </ng-container>
-    <button mat-stroked-button class="logout-button" (click)="logout()">Salir</button>
+
+    <button mat-stroked-button class="logout-button desktop-nav" (click)="logout()">Salir</button>
+
+    <button mat-icon-button class="mobile-menu-button" (click)="toggleMobileMenu()">
+      <mat-icon>{{ isMobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-nav-overlay" [class.open]="isMobileMenuOpen">
+  <a routerLink="/app/diario" routerLinkActive="active-link" (click)="toggleMobileMenu()">Diario</a>
+  <a routerLink="/app/calendario" routerLinkActive="active-link" (click)="toggleMobileMenu()">Calendario</a>
+  <a routerLink="/app/progreso" routerLinkActive="active-link" (click)="toggleMobileMenu()">Progreso</a>
+  <a routerLink="/app/foro" routerLinkActive="active-link" (click)="toggleMobileMenu()">Foro</a>
+  <button mat-stroked-button class="logout-button" (click)="logout()">Salir</button>
+</div>

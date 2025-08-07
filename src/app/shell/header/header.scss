@@ -20,15 +20,9 @@
   flex: 1;
 }
 
-.nav-left {
-  justify-content: flex-start;
-}
-.nav-center {
-  justify-content: center;
-}
-.nav-right {
-  justify-content: flex-end;
-}
+.nav-left { justify-content: flex-start; }
+.nav-center { justify-content: center; }
+.nav-right { justify-content: flex-end; }
 
 .logo {
   font-size: 1.5rem;
@@ -55,14 +49,8 @@
     background-color: #673ab7;
     transition: width 0.3s ease;
   }
-
-  &:hover, &.active-link {
-    color: #673ab7;
-  }
-
-  &.active-link::after {
-    width: 100%;
-  }
+  &:hover, &.active-link { color: #673ab7; }
+  &.active-link::after { width: 100%; }
 }
 
 .challenge-counter {
@@ -72,6 +60,7 @@
   border-radius: 20px;
   background-color: #e8eaf6;
   color: #3f51b5;
+  white-space: nowrap;
 
   &.completed {
     background-color: #c8e6c9;
@@ -85,7 +74,60 @@
   border-radius: 20px;
   font-weight: 500;
   
-  &:hover {
-    background-color: #f5f5f5;
+  &:hover { background-color: #f5f5f5; }
+}
+
+// --- LÓGICA RESPONSIVE ---
+
+.mobile-menu-button {
+  display: none; // Oculto por defecto
+}
+
+.mobile-nav-overlay {
+  display: none; // Oculto por defecto
+}
+
+// Cuando la pantalla sea de 850px o menos...
+@media (max-width: 850px) {
+  .desktop-nav {
+    display: none; // Ocultamos los enlaces de escritorio y el botón de salir
+  }
+
+  .mobile-menu-button {
+    display: block; // Mostramos el botón de hamburguesa
+  }
+  
+  .nav-center {
+    display: none; // Ocultamos el contenedor central vacío
+  }
+
+  .mobile-nav-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    
+    // Animación de entrada y salida
+    transition: transform 0.3s ease-in-out, visibility 0.3s;
+    transform: translateY(-100%);
+    visibility: hidden;
+    z-index: -1;
+
+    &.open {
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    a {
+      font-size: 1.2rem;
+      padding: 0.5rem;
+    }
   }
 }
