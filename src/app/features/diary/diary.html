@@ -16,10 +16,11 @@
       <p>Aún no has escrito ninguna entrada.</p>
       <span>¡Haz clic en "Añadir Nueva Entrada" para comenzar!</span>
     </div>
+
     <div class="entry-card" *ngFor="let entry of entries">
       <div class="entry-card-header">
         <div class="title-group">
-            <span *ngIf="getChallengeDayForEntry(entry.date) as day" class="day-pill">
+            <span *ngIf="challengeDayMap.get(entry.date) as day" class="day-pill">
               Día {{ day }}
             </span>
             <h2>{{ entry.title }}</h2>

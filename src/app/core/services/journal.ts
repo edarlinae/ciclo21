@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, of, Observable } from 'rxjs';
+import { BehaviorSubject, of, from, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Firestore, collection, collectionData, doc, setDoc, deleteDoc, docData, query, orderBy, getDoc } from '@angular/fire/firestore';
 import { AuthService } from '../auth/auth';
@@ -74,13 +74,28 @@ export class JournalService {
     return deleteDoc(entryRef);
   }
 
-  getChallengeDay(entryDateStr: string): number | null {
-    // Esta función necesita la fecha de inicio, la cual ahora es asíncrona.
-    // Para simplificar, la dejamos así por ahora, pero lo ideal sería hacerla asíncrona también.
-    const statusDoc = doc(this.firestore, `users/${this.authService.userSubject.getValue()?.uid}/challenge/status`);
-    // Esta implementación es síncrona y no funcionará bien.
-    // La dejaremos pendiente de refactorizar para no complicar el arreglo actual.
-    return 1; // Devolvemos un valor temporal para que compile.
+  async getChallengeDay(entryDateStr: string): Promise<number | null> {
+    const user = this.authService.userSubject.getValue();
+    if (!user) return null;
+
+    const statusRef = doc(this.firestore, `users/${user.uid}/challenge/status`);
+    const statusSnap = await getDoc(statusRef);
+    const startDateStr = statusSnap.exists() ? statusSnap.data()['startDate'] : null;
+
+    if (!startDateStr) return null;
+
+    const startDate = new Date(startDateStr);
+    startDate.setHours(0, 0, 0, 0);
+    const entryDate = new Date(entryDateStr);
+    entryDate.setHours(0, 0, 0, 0);
+    
+    const diffTime = entryDate.getTime() - startDate.getTime();
+    if (diffTime < 0) return null;
+
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const dayNumber = diffDays + 1;
+
+    return (dayNumber > 0 && dayNumber <= 21) ? dayNumber : null;
   }
 
   async getChallengeStatus(): Promise<ChallengeStatus> {

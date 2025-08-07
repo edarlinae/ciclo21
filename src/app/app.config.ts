@@ -9,20 +9,19 @@ import localeEs from '@angular/common/locales/es';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-// ---------------------------------
 
 import { routes } from './app.routes';
 
-// --- PEGA AQUÍ LA CONFIGURACIÓN QUE COPIASTE DE FIREBASE ---
+// --- TU CONFIGURACIÓN DE FIREBASE ---
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_MESSAGING_SENDER_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyBwwllQ4LJOrGgdHR_EYALeWcfdAIVCCUE",
+  authDomain: "ciclo21-app.firebaseapp.com",
+  projectId: "ciclo21-app",
+  storageBucket: "ciclo21-app.appspot.com",
+  messagingSenderId: "455665457482",
+  appId: "1:455665457482:web:f15d1eeaeec5cd263a49b3"
 };
-// ------------------------------------------------
+// ------------------------------------
 
 registerLocaleData(localeEs, 'es');
 
@@ -37,6 +36,5 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
-    // --------------------------------
   ]
 };

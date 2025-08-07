@@ -20,7 +20,7 @@
     
     <div class="day" *ngFor="let day of daysInMonth" [class.not-current-month]="!day.isCurrentMonth" (click)="day.isCurrentMonth && openJournalEntry(day.date)">
       
-      <span *ngIf="getChallengeDayForDate(day.date) as challengeDay" class="challenge-day-pill">
+      <span *ngIf="challengeDayMap.get(day.date) as challengeDay" class="challenge-day-pill">
         Día {{ challengeDay }}
       </span>
 

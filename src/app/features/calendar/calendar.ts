@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, TitleCasePipe, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common'; // TitleCasePipe eliminado de aquí
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,14 +16,7 @@ interface CalendarDay {
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [
-    CommonModule, 
-    TitleCasePipe, 
-    DatePipe, 
-    MatDialogModule, 
-    MatIconModule, 
-    MatButtonModule
-  ],
+  imports: [ CommonModule, DatePipe, MatDialogModule, MatIconModule, MatButtonModule ], // TitleCasePipe eliminado de aquí
   templateUrl: './calendar.html',
   styleUrl: './calendar.scss'
 })
@@ -36,25 +29,32 @@ export class Calendar implements OnInit {
   public viewDate: Date = new Date();
   private today: string = this.formatDate(new Date());
 
+  public challengeDayMap = new Map<string, number | null>();
+
   ngOnInit(): void {
     this.generateCalendarDays(this.viewDate);
     
     this.journalService.entries$.subscribe(() => {
       this.generateCalendarDays(this.viewDate);
+      this.updateChallengeDayMap();
     });
+  }
+
+  async updateChallengeDayMap(): Promise<void> {
+    for (const day of this.daysInMonth) {
+      const challengeDay = await this.journalService.getChallengeDay(day.date);
+      this.challengeDayMap.set(day.date, challengeDay);
+    }
   }
   
   changeMonth(offset: number): void {
     this.viewDate.setMonth(this.viewDate.getMonth() + offset);
     this.generateCalendarDays(this.viewDate);
+    this.updateChallengeDayMap();
   }
 
-  // --- MÉTODO CORREGIDO ---
   openJournalEntry(date: string): void {
     const todayStr = this.formatDate(new Date());
-
-    // Comparamos las fechas como texto 'YYYY-MM-DD' para evitar errores de zona horaria.
-    // Si la fecha seleccionada es mayor que la de hoy, no hacemos nada.
     if (date > todayStr) {
       return;
     }
@@ -73,10 +73,6 @@ export class Calendar implements OnInit {
   public getEntryForDate(date: string): JournalEntry | undefined {
     return this.journalService.getEntryForDate(date);
   }
-  
-  public getChallengeDayForDate(date: string): number | null {
-    return this.journalService.getChallengeDay(date);
-  }
 
   public getEmotionColorFromId(id: string): string {
     const emotion = this.journalService.getEmotionById(id);
@@ -90,30 +86,24 @@ export class Calendar implements OnInit {
   private generateCalendarDays(date: Date): void {
     const year = date.getFullYear();
     const month = date.getMonth();
-    
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
     const lastDayOfLastMonth = new Date(year, month, 0).getDate();
-
     const days: CalendarDay[] = [];
-    
     let startDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
     for (let i = startDay; i > 0; i--) {
         const date = new Date(year, month - 1, lastDayOfLastMonth - i + 1);
         days.push({ date: this.formatDate(date), dayNumber: date.getDate(), isCurrentMonth: false });
     }
-
     for (let i = 1; i <= lastDateOfMonth; i++) {
         const date = new Date(year, month, i);
         days.push({ date: this.formatDate(date), dayNumber: i, isCurrentMonth: true });
     }
-
     const remainingDays = 42 - days.length;
     for (let i = 1; i <= remainingDays; i++) {
         const date = new Date(year, month + 1, i);
         days.push({ date: this.formatDate(date), dayNumber: i, isCurrentMonth: false });
     }
-
     this.daysInMonth = days;
   }
 
