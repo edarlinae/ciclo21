@@ -1,6 +1,6 @@
 # 🌱 Ciclo 21 - App de Autoconciencia y Creación de Hábitos
 
-Bienvenido/a a **Ciclo 21**, una aplicación web progresiva desarrollada con **Angular (v17+)**, diseñada para ser una herramienta de apoyo en la transformación personal. Basada en la teoría de los 21 días para formar un hábito, esta app te acompaña en procesos de cambio, como superar una ruptura, adoptar una rutina de ejercicio o mejorar tu bienestar emocional.
+Bienvenido/a a **Ciclo 21**, una aplicación web progresiva desarrollada con **Angular (v17+)**, diseñada para ser una herramienta de apoyo en la transformación personal. Basada en la teoría de los 21 días para formar un hábito, esta app te acompaña en procesos de cambio, como adoptar una rutina de ejercicio o mejorar tu bienestar emocional o superar una ruptura.
 
 Este proyecto fusiona un backend robusto con **Firebase** y un frontend moderno y reactivo para ofrecer una experiencia de usuario fluida, segura y motivadora.
 
