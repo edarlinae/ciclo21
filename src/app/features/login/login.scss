@@ -1,0 +1,105 @@
+:host {
+  --primary-color: #673ab7;
+  --background-gradient: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 100%);
+}
+
+.login-page-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+// Panel izquierdo con la marca
+.branding-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-gradient);
+  color: var(--primary-color);
+  text-align: center;
+
+  .branding-content {
+    .logo {
+      font-size: 3rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+    p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      opacity: 0.8;
+    }
+  }
+}
+
+// Panel derecho con el formulario
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  p {
+    color: #6c757d;
+    margin-bottom: 2.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .login-button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+  }
+}
+
+.register-link {
+  display: block;
+  margin-top: 2rem;
+  color: #6c757d;
+  text-decoration: none;
+  font-size: 0.9rem;
+  
+  strong {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  
+  &:hover strong {
+    text-decoration: underline;
+  }
+}
+
+// Media query para pantallas pequeñas
+@media (max-width: 768px) {
+  .login-page-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .branding-panel {
+    display: none; // Ocultamos el panel de la marca en móviles
+  }
+  .form-panel {
+    padding: 1rem;
+  }
+}

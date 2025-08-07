@@ -2,12 +2,9 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-// Imports de Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
 import { AuthService } from '../../core/auth/auth';
 
 @Component({

@@ -1,18 +1,32 @@
-<div class="auth-container">
-  <div class="auth-card">
-    <h2>Iniciar Sesión</h2>
-    <p>Bienvenida de nuevo a tu ciclo.</p>
-    <form (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Correo Electrónico</mat-label>
-        <input matInput type="email" [(ngModel)]="email" name="email" required>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="password" [(ngModel)]="password" name="password" required>
-      </mat-form-field>
-      <button mat-flat-button color="primary" type="submit">Entrar</button>
-    </form>
-    <a routerLink="/register">¿No tienes una cuenta? Regístrate</a>
+<div class="login-page-wrapper">
+  
+  <div class="branding-panel">
+    <div class="branding-content">
+      <h1 class="logo" routerLink="/">Ciclo 21</h1>
+      <p>Redescubre tu bienestar, un día a la vez.</p>
+    </div>
+  </div>
+
+  <div class="form-panel">
+    <div class="auth-card">
+      <h2>Iniciar Sesión</h2>
+      <p>Bienvenida de nuevo a tu ciclo.</p>
+      
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" [(ngModel)]="password" name="password" required>
+        </mat-form-field>
+        
+        <button mat-flat-button color="primary" class="login-button" type="submit">Entrar</button>
+      </form>
+      
+      <a routerLink="/register" class="register-link">¿No tienes una cuenta? <strong>Regístrate</strong></a>
+    </div>
   </div>
 </div>
