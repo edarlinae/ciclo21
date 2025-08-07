@@ -6,7 +6,9 @@ import { Calendar } from './features/calendar/calendar';
 import { ProgressComponent } from './features/progress/progress';
 import { LoginComponent } from './features/login/login';
 import { RegisterComponent } from './features/register/register';
-import { authGuard } from './core/auth/auth-guard'; // <-- RUTA CORREGIDA
+import { authGuard } from './core/auth/auth-guard';
+import { ForumComponent } from './features/forum/forum';
+import { ForumDetailComponent } from './features/forum-detail/forum-detail';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, title: 'Ciclo 21 - Iniciar Sesión' },
@@ -19,11 +21,13 @@ export const routes: Routes = [
   {
     path: 'app',
     component: MainLayoutComponent,
-    canActivate: [authGuard], // Ruta protegida
+    canActivate: [authGuard],
     children: [
       { path: 'calendario', component: Calendar, title: 'Ciclo 21 - Calendario' },
       { path: 'diario', component: DiaryComponent, title: 'Ciclo 21 - Diario' },
       { path: 'progreso', component: ProgressComponent, title: 'Ciclo 21 - Mi Progreso'},
+      { path: 'foro', component: ForumComponent, title: 'Ciclo 21 - Foro' },
+      { path: 'foro/:id', component: ForumDetailComponent, title: 'Ciclo 21 - Publicación' },
       { path: '', redirectTo: 'diario', pathMatch: 'full' }
     ]
   },

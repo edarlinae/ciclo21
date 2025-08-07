@@ -1,0 +1,41 @@
+<div class="forum-container">
+  <header class="forum-header">
+    <h1>Foro de la Comunidad</h1>
+    <p>Un lugar para compartir experiencias, dar y recibir apoyo.</p>
+    <button mat-flat-button color="primary" (click)="showCreateForm = !showCreateForm">
+      <mat-icon>add_circle_outline</mat-icon>
+      {{ showCreateForm ? 'Cancelar' : 'Crear Nueva Publicación' }}
+    </button>
+  </header>
+
+  <div *ngIf="showCreateForm" class="create-post-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Título de la publicación</mat-label>
+      <input matInput [(ngModel)]="newPost.title" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Escribe tu mensaje...</mat-label>
+      <textarea matInput [(ngModel)]="newPost.content" rows="5" required></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="createPost()">Publicar</button>
+  </div>
+
+  <div class="post-list">
+    <div *ngIf="(posts$ | async)?.length === 0" class="no-posts">
+      <p>Todavía no hay publicaciones. ¡Sé la primera persona en crear una!</p>
+    </div>
+    
+    <a *ngFor="let post of (posts$ | async)" [routerLink]="['/app/foro', post.id]" class="post-card">
+      <div class="post-content">
+        <h2>{{ post.title }}</h2>
+        <p class="author-info">
+          Publicado por {{ post.authorEmail }} - {{ post.createdAt.toDate() | date:'medium' }}
+        </p>
+      </div>
+      <div class="post-meta">
+        <mat-icon>comment</mat-icon>
+        <span>{{ post.replyCount || 0 }}</span>
+      </div>
+    </a>
+  </div>
+</div>

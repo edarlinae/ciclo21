@@ -1,0 +1,37 @@
+<div class="detail-container">
+  <a routerLink="/app/foro" class="back-link">
+    <mat-icon>arrow_back</mat-icon>
+    Volver al foro
+  </a>
+
+  <div *ngIf="post" class="post-content">
+    <h1>{{ post.title }}</h1>
+    <p class="author-info">
+      Publicado por {{ post.authorEmail }} - {{ post.createdAt.toDate() | date:'fullDate' }}
+    </p>
+    <div class="main-text">{{ post.content }}</div>
+  </div>
+
+  <div class="replies-section">
+    <h3>Respuestas</h3>
+    <div *ngIf="(replies$ | async)?.length === 0" class="no-replies">
+      Todavía no hay respuestas. ¡Anímate a ser la primera persona!
+    </div>
+
+    <div class="reply-card" *ngFor="let reply of (replies$ | async)">
+      <p class="reply-content">{{ reply.content }}</p>
+      <p class="author-info">
+        {{ reply.authorEmail }} - {{ reply.createdAt.toDate() | date:'medium' }}
+      </p>
+    </div>
+  </div>
+
+  <div class="reply-form">
+    <h3>Deja tu respuesta</h3>
+    <mat-form-field appearance="outline">
+      <mat-label>Escribe tu mensaje de apoyo...</mat-label>
+      <textarea matInput [(ngModel)]="newReplyContent" rows="4" required></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addReply()">Responder</button>
+  </div>
+</div>
